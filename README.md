@@ -1,6 +1,23 @@
 # Date Supercharger
 
-"A nice shortcut for date queries"
+A nice shortcut for date queries.
+
+`date_supercharger` adds `_after`, `_after_or_at`, `_before` and `_before_or_at` methods to every date/datetime field of Active Record models.
+
+[![Build Status](https://travis-ci.org/simon0191/date_supercharger.svg)](https://travis-ci.org/simon0191/date_supercharger)
+[![Code Climate](https://codeclimate.com/github/simon0191/date_supercharger/badges/gpa.svg)](https://codeclimate.com/github/simon0191/date_supercharger)
+
+## Usage
+
+```ruby
+Visit.created_at_after(DateTime.now)
+```
+
+instead of
+
+```ruby
+Visit.where("created_at > ?",DateTime.now)
+```
 
 ## Installation
 
