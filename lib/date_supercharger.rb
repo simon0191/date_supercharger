@@ -16,7 +16,7 @@ module DateSupercharger
             where("#{match.attribute} #{operators[match.suffix]} ?", date)
           end
         end
-        send(method_sym, arguments.first)
+        send(method_sym, *arguments)
       else
         super
       end

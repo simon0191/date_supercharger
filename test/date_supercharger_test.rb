@@ -28,6 +28,12 @@ class TestDateSupercharger < Minitest::Test
       it "should not include be inclusive" do
         assert_equal 6, Visit.visit_date_after(monday).count
       end
+      it "should raise an ArgumentError when receives more than one param" do
+        assert_raises(ArgumentError) { Visit.visit_date_after(monday,:additional_argument) }
+      end
+      it "should raise an ArgumentError when receives no params" do
+        assert_raises(ArgumentError) { Visit.visit_date_after() }
+      end
     end
 
     describe "#_after_or_at" do
@@ -47,6 +53,7 @@ class TestDateSupercharger < Minitest::Test
         assert_equal 7, Visit.visit_date_before_or_at(sunday).count
       end
     end
+
 
   end
 
