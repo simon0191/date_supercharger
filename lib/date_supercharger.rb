@@ -10,24 +10,22 @@ module DateSupercharger
       match = ModelDateExtensionMatch.new(self,method_sym)
 
       if match.match?
+        new_method = "#{match.attribute}_#{match.suffix}"
         case match.suffix
         when :after,:before,:before_or_at,:after_or_at
           operators = { after: ">", before: "<", before_or_at: "<=", after_or_at: ">=" }
           singleton_class.class_eval do
-            define_method("#{match.attribute}_#{match.suffix}") do |date|
+            define_method(new_method) do |date|
               where("#{match.attribute} #{operators[match.suffix]} ?", date)
             end
           end
-        when :between
+        when :between,:between_inclusive
+          methods = {between: ["after_or_at","before"],between_inclusive:["after_or_at","before_or_at"]}
           singleton_class.class_eval do
-            define_method("#{match.attribute}_#{match.suffix}") do |from,to|
-              send("#{match.attribute}_after_or_at",from).send("#{match.attribute}_before",to)
-            end
-          end
-        when :between_inclusive
-          singleton_class.class_eval do
-            define_method("#{match.attribute}_#{match.suffix}") do |from,to|
-              send("#{match.attribute}_after_or_at",from).send("#{match.attribute}_before_or_at",to)
+            define_method(new_method) do |from,to|
+              from_method = methods[match.suffix].first
+              to_method = methods[match.suffix].second
+              send("#{match.attribute}_#{from_method}",from).send("#{match.attribute}_#{to_method}",to)
             end
           end
         end
