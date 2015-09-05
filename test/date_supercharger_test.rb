@@ -54,6 +54,26 @@ class TestDateSupercharger < Minitest::Test
       end
     end
 
+    describe "#_between" do
+      it "should include from but exclude to" do
+        assert_equal 6, Visit.visit_date_between(monday,sunday).count
+      end
+    end
+
+    describe "#_between_inclusive" do
+      it "should include from but exclude to" do
+        assert_equal 7, Visit.visit_date_between_inclusive(monday,sunday).count
+      end
+    end
+
+    describe "#respond_to?" do
+      it "should respond_to date supercharger methods" do
+        supercharger_methods = [:before,:after,:before_or_at,:after_or_at,:between,:between_inclusive]
+        supercharger_methods.each do |method|
+          assert_equal true, Visit.respond_to?("visit_date_#{method}")
+        end
+      end
+    end
 
   end
 
