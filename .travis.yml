@@ -6,3 +6,6 @@ gemfile:
   - Gemfile
 before_install: gem install bundler -v 1.10.6
 script: bundle exec rake test
+addons:
+  code_climate:
+    repo_token: 30943d3e71e45add9939a3bd9c7a56385ee4612643c8a48864517c2d92505834

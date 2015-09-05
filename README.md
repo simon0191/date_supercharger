@@ -6,7 +6,7 @@ A nice shortcut for date queries.
 
 [![Build Status](https://travis-ci.org/simon0191/date_supercharger.svg)](https://travis-ci.org/simon0191/date_supercharger)
 [![Code Climate](https://codeclimate.com/github/simon0191/date_supercharger/badges/gpa.svg)](https://codeclimate.com/github/simon0191/date_supercharger)
-
+[![Test Coverage](https://codeclimate.com/github/simon0191/date_supercharger/badges/coverage.svg)](https://codeclimate.com/github/simon0191/date_supercharger/coverage)
 ## Usage
 
 ```ruby

@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "byebug"
+  spec.add_development_dependency "codeclimate-test-reporter"
 end
