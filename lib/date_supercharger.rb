@@ -1,5 +1,6 @@
 require "date_supercharger/version"
 require "date_supercharger/matcher"
+require "date_supercharger/method_definer"
 require "active_record"
 
 module DateSupercharger
@@ -11,25 +12,8 @@ module DateSupercharger
       matcher = Matcher.new(self,method_sym)
 
       if matcher.match?
-        new_method = "#{matcher.attribute}_#{matcher.suffix}"
-        case matcher.suffix
-        when :after,:before,:before_or_at,:after_or_at
-          operators = { after: ">", before: "<", before_or_at: "<=", after_or_at: ">=" }
-          singleton_class.class_eval do
-            define_method(new_method) do |date|
-              where("#{matcher.attribute} #{operators[matcher.suffix]} ?", date)
-            end
-          end
-        when :between,:between_inclusive
-          methods = {between: ["after_or_at","before"],between_inclusive:["after_or_at","before_or_at"]}
-          singleton_class.class_eval do
-            define_method(new_method) do |from,to|
-              from_method = methods[matcher.suffix].first
-              to_method = methods[matcher.suffix].second
-              send("#{matcher.attribute}_#{from_method}",from).send("#{matcher.attribute}_#{to_method}",to)
-            end
-          end
-        end
+        method_definer = MethodDefiner.new(self)
+        method_definer.define(attribute: matcher.attribute, suffix: matcher.suffix)
         send(method_sym, *arguments)
       else
         super
