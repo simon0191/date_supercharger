@@ -25,7 +25,7 @@ class TestDateSupercharger < Minitest::Test
   describe "ActiveRecord has established a connection to the database" do
 
     describe "#_after" do
-      it "should not include be inclusive" do
+      it "should not be inclusive" do
         assert_equal 6, Visit.visit_date_after(monday).count
       end
       it "should raise an ArgumentError when receives more than one param" do
@@ -43,7 +43,7 @@ class TestDateSupercharger < Minitest::Test
     end
 
     describe "#_before" do
-      it "should not include be inclusive" do
+      it "should not be inclusive" do
         assert_equal 6, Visit.visit_date_before(sunday).count
       end
     end
@@ -61,20 +61,24 @@ class TestDateSupercharger < Minitest::Test
     end
 
     describe "#_between_inclusive" do
-      it "should include from but exclude to" do
+      it "should include from and to" do
         assert_equal 7, Visit.visit_date_between_inclusive(monday,sunday).count
       end
     end
 
     describe "#respond_to?" do
-      it "should respond_to date supercharger methods" do
+      it "should respond to date supercharger methods" do
         supercharger_methods = [:before,:after,:before_or_at,:after_or_at,:between,:between_inclusive]
         supercharger_methods.each do |method|
           assert_equal true, Visit.respond_to?("visit_date_#{method}")
         end
       end
     end
-
+    # TODO:
+    # describe "when method name doesn't match date sueprcharger methods" do
+    #   it "should delegate methods to super" do
+    #   end
+    # end
   end
 
   describe "ActiveRecord has not established a connection to the database" do
@@ -84,7 +88,6 @@ class TestDateSupercharger < Minitest::Test
     it "should not raise exception" do
       assert_equal false, Visit.respond_to?(:unexisting_method)
     end
-
   end
 
   private
