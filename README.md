@@ -7,6 +7,8 @@ Date Supercharger adds `_between`,`_between_inclusive`,`_after`, `_after_or_at`,
 [![Build Status](https://travis-ci.org/simon0191/date_supercharger.svg)](https://travis-ci.org/simon0191/date_supercharger)
 [![Code Climate](https://codeclimate.com/github/simon0191/date_supercharger/badges/gpa.svg)](https://codeclimate.com/github/simon0191/date_supercharger)
 [![Test Coverage](https://codeclimate.com/github/simon0191/date_supercharger/badges/coverage.svg)](https://codeclimate.com/github/simon0191/date_supercharger/coverage)
+[![Gem Version](https://badge.fury.io/rb/date_supercharger.svg)](http://badge.fury.io/rb/date_supercharger)
+
 ## Usage
 
 ### between
